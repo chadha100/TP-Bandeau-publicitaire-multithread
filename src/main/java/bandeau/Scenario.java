@@ -2,6 +2,9 @@ package bandeau;
 
 import java.util.List;
 import java.util.LinkedList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
@@ -38,7 +41,7 @@ public class Scenario {
     public void addEffect(Effect e, int repeats) {
         lock.writeLock().lock(); // 🔒 Empêche l'ajout d'effets pendant l'exécution
         try {
-            myElements.add(new ScenarioElement(effect, repeats));
+            myElements.add(new ScenarioElement(e, repeats));
         } finally {
             lock.writeLock().unlock();
         }
